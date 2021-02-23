@@ -1,11 +1,16 @@
 import React from 'react'
-import { SafeAreaView, Text } from 'react-native'
+import { SafeAreaView } from 'react-native'
+import ContactList from './components/contact-list'
+import ContactProvider from './components/contact-provider'
+import { colors } from './config/theme'
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>Hello world</Text>
-    </SafeAreaView>
+    <ContactProvider>
+      <SafeAreaView style={{ backgroundColor: colors.primaryBg }}>
+        <ContactList />
+      </SafeAreaView>
+    </ContactProvider>
   )
 }
 
