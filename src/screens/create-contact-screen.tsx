@@ -4,7 +4,7 @@ import { Navigation } from 'react-native-navigation'
 import { colors } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
-import { NavigationScreenComponent } from '../shared/types'
+import { NavigationScreenComponent } from '../shared/navigation-utils'
 
 const CreateContactScreen: NavigationScreenComponent = props => {
   return (

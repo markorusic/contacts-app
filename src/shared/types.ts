@@ -1,5 +1,3 @@
-import { LayoutComponent } from 'react-native-navigation'
-
 export enum AsyncStatus {
   idle = 'idle',
   loading = 'loading',
@@ -13,11 +11,7 @@ export type AsyncValue<T> = {
   error: string | null
 }
 
-export interface NavigationScreenComponent<T = {}>
-  extends React.FC<
-    T & {
-      componentId: string
-    }
-  > {
-  options?: LayoutComponent['options']
+export type Action<T = string, K = unknown> = {
+  type: T
+  payload?: K
 }

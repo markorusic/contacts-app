@@ -5,11 +5,14 @@ import {
   SectionListProps,
   TouchableOpacity
 } from 'react-native'
+import {
+  Navigation,
+  OptionsModalPresentationStyle
+} from 'react-native-navigation'
 import { last, sortBy } from 'lodash'
 import { colors } from '../config/theme'
 import { ContactDto } from '../services/contact-service'
 import StyleView, { StyleText } from '../shared/components/style-view'
-import { Navigation } from 'react-native-navigation'
 import { screens } from '../config/navigation'
 
 export interface ContactListProps
@@ -82,7 +85,11 @@ const ContactList: FC<ContactListProps> = ({
                 component: {
                   id: screens.ContactDetail,
                   name: screens.ContactDetail,
-                  passProps: { contact }
+                  passProps: { contact },
+                  options: {
+                    modalPresentationStyle:
+                      OptionsModalPresentationStyle.fullScreen
+                  }
                 }
               })
             }}

@@ -5,7 +5,7 @@ import { colors } from '../config/theme'
 import { ContactDto } from '../services/contact-service'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
-import { NavigationScreenComponent } from '../shared/types'
+import { NavigationScreenComponent } from '../shared/navigation-utils'
 
 type Props = {
   contact: ContactDto

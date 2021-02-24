@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { Navigation } from 'react-native-navigation'
+import { useSelector } from 'react-redux'
 import { colors } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
-import { AsyncStatus, NavigationScreenComponent } from '../shared/types'
+import { AsyncStatus } from '../shared/types'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import ContactList from '../components/contact-list'
-import { useContacts } from '../components/contact-provider'
-import { Navigation } from 'react-native-navigation'
 import { screens } from '../config/navigation'
+import { NavigationScreenComponent } from '../shared/navigation-utils'
+import { RootState } from '../store'
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
 })
 
 const ContactsScreen: NavigationScreenComponent = () => {
-  const contacts = useContacts()
+  const contacts = useSelector((state: RootState) => state.contacts)
   const searchRef = useRef<TextInput>(null)
   const [searchText, setSearchText] = useState('')
 
@@ -30,7 +32,6 @@ const ContactsScreen: NavigationScreenComponent = () => {
     }
   }, [searchText])
 
-  console.log('AAAAA', contacts.status)
   return (
     <ScreenContainer>
       <ContactList
