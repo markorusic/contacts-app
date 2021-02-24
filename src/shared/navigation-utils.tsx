@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
 import { LayoutComponent, Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
-import { store } from '../store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from '../store'
 
 export const registerComponent = <T,>(
   componentId: string,
@@ -11,7 +12,9 @@ export const registerComponent = <T,>(
     componentId,
     () => props => (
       <Provider store={store}>
-        <Component {...props} />
+        <PersistGate loading={null} persistor={persistor}>
+          <Component {...props} />
+        </PersistGate>
       </Provider>
     ),
     () => Component

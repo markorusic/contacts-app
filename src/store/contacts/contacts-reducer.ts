@@ -1,13 +1,20 @@
-import { ContactDto } from '../../services/contact-service'
-import { Action, AsyncStatus, AsyncValue } from '../../shared/types'
+import { Action } from '../../shared/types'
 import { contactsActionTypes } from './contacts-actions'
 
-export type ContactsState = AsyncValue<ContactDto[]>
+export interface ContactDto {
+  id: string
+  firstName: string
+  lastName: string
+  phoneNumber: string
+  zipCode: string
+}
+
+export type ContactsState = {
+  value: ContactDto[]
+}
 
 const initialState: ContactsState = {
-  value: [],
-  status: AsyncStatus.idle,
-  error: null
+  value: []
 }
 
 const contactsReducer = (
@@ -15,37 +22,22 @@ const contactsReducer = (
   action: Action
 ): ContactsState => {
   switch (action.type) {
-    case contactsActionTypes.loadStarted:
+    case contactsActionTypes.init:
       return {
         ...state,
-        status: AsyncStatus.loading
-      }
-
-    case contactsActionTypes.loadSuccess:
-      return {
-        ...state,
-        value: action.payload as ContactDto[],
-        status: AsyncStatus.success,
-        error: null
-      }
-
-    case contactsActionTypes.loadFail:
-      return {
-        ...state,
-        error: action.payload as string,
-        status: AsyncStatus.error
+        value: action.payload as ContactDto[]
       }
 
     case contactsActionTypes.create:
       return {
         ...state,
-        value: [action.payload as ContactDto, ...(state.value ?? [])]
+        value: [action.payload as ContactDto, ...state.value]
       }
 
     case contactsActionTypes.delete:
       return {
         ...state,
-        value: state.value?.filter(
+        value: state.value.filter(
           contact => contact.id !== (action.payload as ContactDto).id
         )
       }
@@ -53,7 +45,7 @@ const contactsReducer = (
     case contactsActionTypes.update:
       return {
         ...state,
-        value: state.value?.map(contact => {
+        value: state.value.map(contact => {
           const updatedContact = action.payload as ContactDto
           return contact.id === updatedContact.id ? updatedContact : contact
         })

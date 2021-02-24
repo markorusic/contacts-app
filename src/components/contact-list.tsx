@@ -11,9 +11,11 @@ import {
 } from 'react-native-navigation'
 import { last, sortBy } from 'lodash'
 import { colors } from '../config/theme'
-import { ContactDto } from '../services/contact-service'
+import { ContactDto } from '../store/contacts/contacts-reducer'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import { screens } from '../config/navigation'
+import { useDispatch } from 'react-redux'
+import { initContacts } from '../store/contacts/contacts-actions'
 
 export interface ContactListProps
   extends Partial<SectionListProps<ContactDto>> {
@@ -26,6 +28,8 @@ const ContactList: FC<ContactListProps> = ({
   loading = false,
   ...props
 }) => {
+  const dispatch = useDispatch<any>()
+
   const contactInitialLetterMap = sortBy(data, 'firstName')?.reduce(
     (acc, contact) => {
       const [initialLetter] = contact.firstName
@@ -57,7 +61,25 @@ const ContactList: FC<ContactListProps> = ({
           {loading ? (
             <ActivityIndicator color={colors.primaryText} />
           ) : (
-            <StyleText fontSize={25}>No data</StyleText>
+            <StyleView justifyContent="center" alignItems="center">
+              <StyleText fontSize={25}>No data</StyleText>
+              <StyleView
+                marginTop={10}
+                padding={12}
+                borderRadius={5}
+                backgroundColor={colors.brandColor}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(initContacts())
+                  }}
+                >
+                  <StyleText fontSize={15}>
+                    Initialize contacts with mockup data
+                  </StyleText>
+                </TouchableOpacity>
+              </StyleView>
+            </StyleView>
           )}
         </StyleView>
       )}

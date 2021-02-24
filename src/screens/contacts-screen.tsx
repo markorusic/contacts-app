@@ -4,7 +4,6 @@ import { Navigation } from 'react-native-navigation'
 import { useSelector } from 'react-redux'
 import { colors } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
-import { AsyncStatus } from '../shared/types'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import ContactList from '../components/contact-list'
 import { screens } from '../config/navigation'
@@ -55,7 +54,11 @@ const ContactsScreen: NavigationScreenComponent = () => {
                   })
                 }
               >
-                <StyleText fontWeight="500" fontSize={35} color="#0b96e6">
+                <StyleText
+                  fontWeight="500"
+                  fontSize={35}
+                  color={colors.brandColor}
+                >
                   +
                 </StyleText>
               </TouchableOpacity>
@@ -71,8 +74,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
             </StyleView>
           </StyleView>
         }
-        loading={contacts.status === AsyncStatus.loading}
-        data={contacts.value?.filter(contact =>
+        data={contacts.value.filter(contact =>
           `${contact.firstName} ${contact.lastName}`
             .toLowerCase()
             .includes(searchText.toLowerCase())

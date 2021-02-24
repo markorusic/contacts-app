@@ -4,8 +4,6 @@ import { registerComponent } from './shared/navigation-utils'
 import ContactDetailScreen from './screens/contact-detail-screen'
 import ContactsScreen from './screens/contacts-screen'
 import CreateContactScreen from './screens/create-contact-screen'
-import { loadContacts } from './store/contacts/contacts-actions'
-import { store } from './store'
 
 export const init = () => {
   registerComponent(screens.Contacts, ContactsScreen)
@@ -14,7 +12,6 @@ export const init = () => {
   Navigation.setDefaultOptions(navigationOptions)
 
   Navigation.events().registerAppLaunchedListener(() => {
-    store.dispatch<any>(loadContacts())
     Navigation.setRoot({
       root: {
         stack: {
