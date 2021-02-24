@@ -1,39 +1,32 @@
-import { last, sortBy } from 'lodash'
-import React, { useState } from 'react'
+import React, { FC } from 'react'
 import {
   ActivityIndicator,
   SectionList,
-  StyleSheet,
-  TextInput,
+  SectionListProps,
   TouchableOpacity
 } from 'react-native'
+import { last, sortBy } from 'lodash'
 import { colors } from '../config/theme'
 import { ContactDto } from '../services/contact-service'
-import StyleView, { StyleText } from '../shared/style-view'
-import { AsyncStatus } from '../shared/types'
-import { useContacts } from './contact-provider'
+import StyleView, { StyleText } from '../shared/components/style-view'
+import { Navigation } from 'react-native-navigation'
+import { screens } from '../config/navigation'
 
-const styles = StyleSheet.create({
-  searchInput: {
-    height: 40,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-    backgroundColor: '#e6e6e6',
-    color: colors.primaryText
-  }
-})
+export interface ContactListProps
+  extends Partial<SectionListProps<ContactDto>> {
+  data: ContactDto[] | undefined
+  loading?: boolean
+}
 
-const ContactList = () => {
-  const [search, setSearch] = useState('')
-  const contacts = useContacts()
-
-  const contactMap = sortBy(contacts.value, 'firstName')?.reduce(
+const ContactList: FC<ContactListProps> = ({
+  data = [],
+  loading = false,
+  ...props
+}) => {
+  const contactInitialLetterMap = sortBy(data, 'firstName')?.reduce(
     (acc, contact) => {
       const [initialLetter] = contact.firstName
-      const searchMatch = contact.firstName
-        .toLowerCase()
-        .includes(search.toLowerCase())
-      if (initialLetter && searchMatch) {
+      if (initialLetter) {
         if (acc[initialLetter]) {
           acc[initialLetter].push(contact)
         } else {
@@ -45,86 +38,63 @@ const ContactList = () => {
     {} as Record<string, ContactDto[]>
   )
 
-  const contactSections = Object.keys(contactMap).map(title => ({
-    title,
-    data: contactMap[title]
-  }))
+  const contactSections = Object.keys(contactInitialLetterMap).map(
+    initialLetter => ({
+      title: initialLetter,
+      data: contactInitialLetterMap[initialLetter]
+    })
+  )
 
   return (
-    <StyleView>
-      <SectionList
-        key="id"
-        stickySectionHeadersEnabled
-        sections={contactSections}
-        ListHeaderComponent={
-          <StyleView paddingHorizontal={15}>
-            <StyleView
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="baseline"
-            >
-              <StyleText fontWeight="bold" fontSize={20}>
-                Contacts
-              </StyleText>
-              <TouchableOpacity
-                onPress={() => console.log('open create contact screen')}
-              >
-                <StyleText fontWeight="bold" fontSize={35} color="#0b96e6">
-                  +
-                </StyleText>
-              </TouchableOpacity>
-            </StyleView>
-            <StyleView paddingVertical={20}>
-              <TextInput
-                style={styles.searchInput}
-                autoFocus
-                placeholder="Search"
-                value={search}
-                onChangeText={value => setSearch(value)}
-              />
-            </StyleView>
-          </StyleView>
-        }
-        ListEmptyComponent={() => (
-          <StyleView justifyContent="center" alignItems="center">
-            {contacts.status === AsyncStatus.success ? (
-              <StyleText fontSize={25}>No data</StyleText>
-            ) : (
-              <ActivityIndicator color={colors.primaryText} />
-            )}
-          </StyleView>
-        )}
-        renderSectionHeader={({ section }) => (
-          <StyleText
-            backgroundColor={colors.secondaryBg}
-            paddingHorizontal={20}
-            paddingVertical={5}
-            fontWeight="bold"
-            fontSize={16}
+    <SectionList
+      key="id"
+      sections={contactSections}
+      ListEmptyComponent={() => (
+        <StyleView justifyContent="center" alignItems="center">
+          {loading ? (
+            <ActivityIndicator color={colors.primaryText} />
+          ) : (
+            <StyleText fontSize={25}>No data</StyleText>
+          )}
+        </StyleView>
+      )}
+      renderSectionHeader={({ section }) => (
+        <StyleText
+          backgroundColor={colors.secondaryBg}
+          paddingHorizontal={20}
+          paddingVertical={5}
+          fontWeight="bold"
+          fontSize={16}
+        >
+          {section.title}
+        </StyleText>
+      )}
+      renderItem={({ item: contact, section }) => (
+        <StyleView
+          borderBottomColor={colors.secondaryBg}
+          borderBottomWidth={last(section.data)?.id === contact.id ? 0 : 1}
+          paddingHorizontal={20}
+          paddingVertical={15}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              Navigation.showModal({
+                component: {
+                  id: screens.ContactDetail,
+                  name: screens.ContactDetail,
+                  passProps: { contact }
+                }
+              })
+            }}
           >
-            {section.title}
-          </StyleText>
-        )}
-        renderItem={({ item: contact, section }) => (
-          <StyleView
-            borderBottomColor={colors.secondaryBg}
-            borderBottomWidth={last(section.data)?.id === contact.id ? 0 : 1}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                console.log('open contact screen', contact.id)
-              }}
-            >
-              <StyleView paddingHorizontal={20} paddingVertical={15}>
-                <StyleText fontSize={16} fontWeight="500">
-                  {contact.firstName + ' ' + contact.lastName}
-                </StyleText>
-              </StyleView>
-            </TouchableOpacity>
-          </StyleView>
-        )}
-      />
-    </StyleView>
+            <StyleText fontSize={16} fontWeight="500">
+              {contact.firstName + ' ' + contact.lastName}
+            </StyleText>
+          </TouchableOpacity>
+        </StyleView>
+      )}
+      {...props}
+    />
   )
 }
 
