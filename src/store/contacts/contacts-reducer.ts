@@ -5,7 +5,7 @@ export interface ContactDto {
   id: string
   name: string
   phoneNumber: string
-  gender?: 'male' | 'female' | 'other' | null
+  gender?: 'male' | 'female' | 'other'
   country?: string
   zipCode?: string
 }

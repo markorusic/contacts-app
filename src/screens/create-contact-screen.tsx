@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
 import { SelectCountryInput } from '../components/select-country-input'
+import SelectGenderInput from '../components/select-gender-input'
 import { colors } from '../config/theme'
 import { FormTextInput } from '../shared/components/form'
 import ScreenContainer from '../shared/components/screen-container'
@@ -18,7 +19,7 @@ const initialValues: ContactFormValues = {
   name: '',
   phoneNumber: '',
   country: undefined,
-  gender: 'male',
+  gender: undefined,
   zipCode: undefined
 }
 
@@ -91,6 +92,7 @@ const CreateContactScreen: NavigationScreenComponent = props => {
                 label="Phone number:"
                 placeholder="Type phone number"
               />
+              <SelectGenderInput name="gender" label="Select gender:" />
               <SelectCountryInput
                 name="country"
                 label="Select country:"
