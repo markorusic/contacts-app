@@ -34,7 +34,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
         </TouchableOpacity>
       </StyleView>
       <StyleText>
-        #{contact?.id} - {contact?.firstName}
+        #{contact.id} - {contact.name}
       </StyleText>
     </ScreenContainer>
   )

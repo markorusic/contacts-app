@@ -1,30 +1,27 @@
-import { range, capitalize, times, random } from 'lodash'
-import { ThunkAction } from 'redux-thunk'
-import { RootState } from '..'
-import { Action } from '../../shared/types'
+import { range, capitalize, times, random, uniqueId } from 'lodash'
 import { ContactDto } from './contacts-reducer'
+import { RootThunk } from '..'
 
 export const contactsActionTypes = {
-  init: 'init',
-  create: 'create',
-  delete: 'delete',
-  update: 'update'
+  init: 'contacts.init',
+  create: 'contacts.create',
+  delete: 'contacts.delete',
+  update: 'contacts.update'
 }
 
-type ContactsThunk = ThunkAction<void, RootState, unknown, Action<string>>
-
-export const initContacts = (): ContactsThunk => dispatch => {
+export const initContacts = (): RootThunk => dispatch => {
   const alphabet = 'qwertyuiopasdfghjklzxcvbnm'
   const randomString = (size = 5) =>
     capitalize(
       times(size, () => alphabet[random(0, alphabet.length - 1)]).join('')
     )
-  const contacts = range(0, 100).map(id => ({
+  const contacts: ContactDto[] = range(0, 100).map(id => ({
     id: id.toString(),
-    firstName: randomString(5),
-    lastName: randomString(5),
+    name: randomString(5),
+    gender: Math.random() > 0.5 ? 'male' : 'female',
     phoneNumber: randomString(10),
-    zipCode: randomString(5)
+    zipCode: randomString(5),
+    country: randomString(7)
   }))
   dispatch({
     type: contactsActionTypes.init,
@@ -32,9 +29,12 @@ export const initContacts = (): ContactsThunk => dispatch => {
   })
 }
 
-export const createContact = (contact: ContactDto) => ({
+export const createContact = (contact: Omit<ContactDto, 'id'>) => ({
   type: contactsActionTypes.create,
-  payload: contact
+  payload: {
+    ...contact,
+    id: uniqueId('contact_') + Date.now()
+  }
 })
 
 export const updateContact = (contact: ContactDto) => ({

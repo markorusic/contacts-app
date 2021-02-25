@@ -3,5 +3,7 @@ export const colors = {
   secondaryBg: '#d4d4d4',
   primaryText: 'black',
   secondaryText: '#319ad6',
-  brandColor: '#0b96e6'
+  disabled: '#939596',
+  brand: '#0b96e6',
+  error: '#f00'
 }

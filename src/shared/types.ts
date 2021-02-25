@@ -6,7 +6,7 @@ export enum AsyncStatus {
 }
 
 export type AsyncValue<T> = {
-  value: T | undefined
+  value: T
   status: AsyncStatus
   error: string | null
 }

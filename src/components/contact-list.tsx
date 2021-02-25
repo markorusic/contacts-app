@@ -1,10 +1,5 @@
 import React, { FC } from 'react'
-import {
-  ActivityIndicator,
-  SectionList,
-  SectionListProps,
-  TouchableOpacity
-} from 'react-native'
+import { SectionList, SectionListProps, TouchableOpacity } from 'react-native'
 import {
   Navigation,
   OptionsModalPresentationStyle
@@ -14,25 +9,16 @@ import { colors } from '../config/theme'
 import { ContactDto } from '../store/contacts/contacts-reducer'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import { screens } from '../config/navigation'
-import { useDispatch } from 'react-redux'
-import { initContacts } from '../store/contacts/contacts-actions'
 
 export interface ContactListProps
   extends Partial<SectionListProps<ContactDto>> {
   data: ContactDto[] | undefined
-  loading?: boolean
 }
 
-const ContactList: FC<ContactListProps> = ({
-  data = [],
-  loading = false,
-  ...props
-}) => {
-  const dispatch = useDispatch<any>()
-
-  const contactInitialLetterMap = sortBy(data, 'firstName')?.reduce(
+const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
+  const contactInitialLetterMap = sortBy(data, 'name')?.reduce(
     (acc, contact) => {
-      const [initialLetter] = contact.firstName
+      const [initialLetter] = contact.name
       if (initialLetter) {
         if (acc[initialLetter]) {
           acc[initialLetter].push(contact)
@@ -56,33 +42,6 @@ const ContactList: FC<ContactListProps> = ({
     <SectionList
       key="id"
       sections={contactSections}
-      ListEmptyComponent={() => (
-        <StyleView justifyContent="center" alignItems="center">
-          {loading ? (
-            <ActivityIndicator color={colors.primaryText} />
-          ) : (
-            <StyleView justifyContent="center" alignItems="center">
-              <StyleText fontSize={25}>No data</StyleText>
-              <StyleView
-                marginTop={10}
-                padding={12}
-                borderRadius={5}
-                backgroundColor={colors.brandColor}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    dispatch(initContacts())
-                  }}
-                >
-                  <StyleText fontSize={15}>
-                    Initialize contacts with mockup data
-                  </StyleText>
-                </TouchableOpacity>
-              </StyleView>
-            </StyleView>
-          )}
-        </StyleView>
-      )}
       renderSectionHeader={({ section }) => (
         <StyleText
           backgroundColor={colors.secondaryBg}
@@ -117,7 +76,7 @@ const ContactList: FC<ContactListProps> = ({
             }}
           >
             <StyleText fontSize={16} fontWeight="500">
-              {contact.firstName + ' ' + contact.lastName}
+              {contact.name}
             </StyleText>
           </TouchableOpacity>
         </StyleView>

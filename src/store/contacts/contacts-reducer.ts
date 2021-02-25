@@ -3,10 +3,11 @@ import { contactsActionTypes } from './contacts-actions'
 
 export interface ContactDto {
   id: string
-  firstName: string
-  lastName: string
+  name: string
   phoneNumber: string
-  zipCode: string
+  gender?: 'male' | 'female' | 'other' | null
+  country?: string
+  zipCode?: string
 }
 
 export type ContactsState = {
