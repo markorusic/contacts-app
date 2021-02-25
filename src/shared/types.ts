@@ -15,3 +15,8 @@ export type Action<T = string, K = unknown> = {
   type: T
   payload?: K
 }
+
+export declare type Optional<
+  T extends object,
+  K extends keyof T = keyof T
+> = Omit<T, K> & Partial<Pick<T, K>>

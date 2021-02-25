@@ -1,14 +1,18 @@
 import { useFormikContext } from 'formik'
 import React, { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { colors } from '../config/theme'
-import { FormLabel, FormErrorText, InputProps } from '../shared/components/form'
-import StyleView, { StyleText } from '../shared/components/style-view'
-import { ContactDto } from '../store/contacts/contacts-reducer'
+import { colors } from '../../config/theme'
+import {
+  FormLabel,
+  FormErrorText,
+  InputProps
+} from '../../shared/components/form'
+import StyleView, { StyleText } from '../../shared/components/style-view'
+import { ContactDto } from '../../store/contacts/contacts-reducer'
 
 const GENDER_OPTIONS: ContactDto['gender'][] = ['male', 'female', 'other']
 
-const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
+export const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
   const form = useFormikContext<{ gender: ContactDto['gender'] }>()
   return (
     <StyleView>
@@ -40,5 +44,3 @@ const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
     </StyleView>
   )
 }
-
-export default SelectGenderInput

@@ -66,7 +66,7 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
                 component: {
                   id: screens.ContactDetail,
                   name: screens.ContactDetail,
-                  passProps: { contact },
+                  passProps: { contactId: contact.id },
                   options: {
                     modalPresentationStyle:
                       OptionsModalPresentationStyle.fullScreen

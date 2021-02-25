@@ -2,13 +2,17 @@ import { useField, useFormikContext } from 'formik'
 import React, { FC, useEffect, useState } from 'react'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { colors } from '../config/theme'
-import { FormErrorText, FormLabel, InputProps } from '../shared/components/form'
-import { formStyles } from '../shared/components/form-styles'
-import ScreenContainer from '../shared/components/screen-container'
-import StyleView, { StyleText } from '../shared/components/style-view'
-import { RootState } from '../store'
-import { fetchCountries } from '../store/countries/countries-actions'
+import { colors } from '../../config/theme'
+import {
+  FormErrorText,
+  FormLabel,
+  InputProps
+} from '../../shared/components/form'
+import { formStyles } from '../../shared/components/form-styles'
+import ScreenContainer from '../../shared/components/screen-container'
+import StyleView, { StyleText } from '../../shared/components/style-view'
+import { RootState } from '../../store'
+import { fetchCountries } from '../../store/countries/countries-actions'
 
 export interface SelectCountryInputProps extends InputProps {
   placeholder?: string

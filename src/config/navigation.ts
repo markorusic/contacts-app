@@ -4,7 +4,8 @@ import { colors } from './theme'
 export const screens = {
   Contacts: 'Contacts',
   CreateContact: 'CreateContact',
-  ContactDetail: 'ContactDetail'
+  ContactDetail: 'ContactDetail',
+  ContactUpdate: 'ContactUpdate'
 }
 
 export const navigationOptions: Options = {

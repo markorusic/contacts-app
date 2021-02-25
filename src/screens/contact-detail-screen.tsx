@@ -2,19 +2,21 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { colors } from '../config/theme'
-import { ContactDto } from '../store/contacts/contacts-reducer'
+import { screens } from '../config/navigation'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
+import { useContact } from '../store/contacts/hooks'
 
 type Props = {
-  contact: ContactDto
+  contactId: string
 }
 
 const ContactDetailScreen: NavigationScreenComponent<Props> = ({
-  contact,
+  contactId,
   componentId
 }) => {
+  const contact = useContact(contactId)
   return (
     <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
       <StyleView
@@ -27,14 +29,24 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             Back
           </StyleText>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <StyleText fontSize={16} color="gray" opacity={0.7}>
-            Save
+        <TouchableOpacity
+          onPress={() =>
+            Navigation.showModal({
+              component: {
+                id: screens.ContactUpdate,
+                name: screens.ContactUpdate,
+                passProps: { contactId }
+              }
+            })
+          }
+        >
+          <StyleText fontSize={16} color={colors.secondaryText}>
+            Update
           </StyleText>
         </TouchableOpacity>
       </StyleView>
       <StyleText>
-        #{contact.id} - {contact.name}
+        #{contact?.id} - {contact?.name}
       </StyleText>
     </ScreenContainer>
   )

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { colors } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import ContactList from '../components/contact-list'
 import { screens } from '../config/navigation'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
-import { RootState } from '../store'
 import { initContacts } from '../store/contacts/contacts-actions'
+import { useContacts } from '../store/contacts/hooks'
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
 const ContactsScreen: NavigationScreenComponent = () => {
   const dispatch = useDispatch<any>()
-  const contacts = useSelector((state: RootState) => state.contacts)
+  const contacts = useContacts()
   const [searchText, setSearchText] = useState('')
 
   return (
