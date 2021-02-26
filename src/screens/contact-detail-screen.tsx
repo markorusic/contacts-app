@@ -1,6 +1,8 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { Alert, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
+import { useDispatch } from 'react-redux'
+import { get } from 'lodash'
 import { colors } from '../config/theme'
 import { screens } from '../config/navigation'
 import ScreenContainer from '../shared/components/screen-container'
@@ -8,7 +10,7 @@ import StyleView, { StyleText } from '../shared/components/style-view'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
 import { useContact } from '../store/contacts/hooks'
 import { ContactDto } from '../store/contacts/contacts-reducer'
-import { get } from 'lodash'
+import { deleteContact } from '../store/contacts/contacts-actions'
 
 type Props = {
   contactId: string
@@ -25,6 +27,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
   contactId,
   componentId
 }) => {
+  const dispatch = useDispatch()
   const contact = useContact(contactId)
   return (
     <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
@@ -38,50 +41,89 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             Back
           </StyleText>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            Navigation.showModal({
-              component: {
-                id: screens.ContactUpdate,
-                name: screens.ContactUpdate,
-                passProps: { contactId }
-              }
-            })
-          }
-        >
-          <StyleText fontSize={16} color={colors.secondaryText}>
-            Update
-          </StyleText>
-        </TouchableOpacity>
+        {contact && (
+          <TouchableOpacity
+            onPress={() =>
+              Navigation.showModal({
+                component: {
+                  id: screens.ContactUpdate,
+                  name: screens.ContactUpdate,
+                  passProps: { contactId: contact.id }
+                }
+              })
+            }
+          >
+            <StyleText fontSize={16} color={colors.secondaryText}>
+              Update
+            </StyleText>
+          </TouchableOpacity>
+        )}
       </StyleView>
 
-      <StyleView>
-        <StyleView
-          justifyContent="center"
-          alignItems="center"
-          marginBottom={20}
-        >
-          <StyleText fontSize={26} fontWeight="600">
-            {contact?.name}
-          </StyleText>
-        </StyleView>
+      {contact && (
         <StyleView>
-          {Object.keys(contactLabels).map(key => (
-            <StyleView
-              key={key}
-              padding={10}
-              borderRadius={5}
-              marginBottom={10}
-              backgroundColor={colors.secondaryBg}
+          <StyleView
+            justifyContent="center"
+            alignItems="center"
+            marginBottom={20}
+          >
+            <StyleText fontSize={26} fontWeight="600">
+              {contact.name}
+            </StyleText>
+          </StyleView>
+          <StyleView>
+            {Object.keys(contactLabels).map(key => (
+              <StyleView
+                key={key}
+                padding={10}
+                borderRadius={5}
+                marginBottom={10}
+                backgroundColor={colors.secondaryBg}
+              >
+                <StyleText color={colors.brand}>
+                  {get(contactLabels, key)}
+                </StyleText>
+                <StyleText>{get(contact, key)}</StyleText>
+              </StyleView>
+            ))}
+          </StyleView>
+          <StyleView
+            padding={10}
+            borderRadius={5}
+            marginBottom={10}
+            backgroundColor={colors.secondaryBg}
+          >
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert(
+                  'Are you sure that you want to remove this contact?',
+                  '',
+                  [
+                    {
+                      text: 'Yes',
+                      onPress: () => {
+                        Navigation.dismissModal(componentId)
+                        dispatch(deleteContact(contact))
+                      }
+                    },
+                    {
+                      text: 'Cancel',
+                      style: 'cancel'
+                    }
+                  ],
+                  { cancelable: false }
+                )
+              }
             >
-              <StyleText color={colors.brand}>
-                {get(contactLabels, key)}
-              </StyleText>
-              <StyleText>{get(contact, key)}</StyleText>
-            </StyleView>
-          ))}
+              <StyleView>
+                <StyleText fontSize={15} color={colors.error}>
+                  Remove this contact
+                </StyleText>
+              </StyleView>
+            </TouchableOpacity>
+          </StyleView>
         </StyleView>
-      </StyleView>
+      )}
     </ScreenContainer>
   )
 }
