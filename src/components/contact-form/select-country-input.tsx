@@ -1,7 +1,7 @@
 import { useField, useFormikContext } from 'formik'
 import React, { FC, useEffect, useState } from 'react'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { colors, sizes } from '../../config/theme'
 import {
   FormErrorText,
@@ -11,8 +11,8 @@ import {
 import { formStyles } from '../../shared/components/form-styles'
 import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
-import { RootState } from '../../store'
 import { fetchCountries } from '../../store/countries/countries-actions'
+import { useCountries } from '../../store/countries/hooks'
 
 export interface SelectCountryInputProps extends InputProps {
   placeholder?: string
@@ -26,7 +26,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
   const [field] = useField(name)
   const form = useFormikContext()
   const dispatch = useDispatch<any>()
-  const countries = useSelector((state: RootState) => state.countries.value)
+  const countries = useCountries()
 
   const [searchText, setSearchText] = useState('')
   const [showModal, setShowModal] = useState(false)

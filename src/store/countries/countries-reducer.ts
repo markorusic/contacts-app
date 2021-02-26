@@ -4,6 +4,7 @@ import { countriesActionTypes } from './countries-actions'
 export interface CountryDto {
   id: string
   name: string
+  callingCodes: string[]
 }
 
 export type CountriesState = AsyncValue<CountryDto[]>
