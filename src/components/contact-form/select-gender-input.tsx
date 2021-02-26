@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik'
 import React, { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import {
   FormLabel,
   FormErrorText,
@@ -24,8 +24,8 @@ export const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
             onPress={() => form.setFieldValue(name, gender)}
           >
             <StyleView
-              marginRight={5}
-              padding={10}
+              marginRight={sizes.spacing.sm}
+              padding={sizes.spacing.md}
               borderRadius={5}
               borderWidth={1}
               borderColor={colors.disabled}

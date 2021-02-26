@@ -57,7 +57,10 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
       >
-        <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
+        <ScreenContainer
+          paddingHorizontal={sizes.spacing.xl}
+          paddingVertical={sizes.spacing.lg}
+        >
           <StyleView>
             <StyleView
               flexDirection="row"
@@ -82,7 +85,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
               <StyleView flex={1} />
             </StyleView>
 
-            <StyleView paddingVertical={15}>
+            <StyleView paddingVertical={sizes.spacing.lg}>
               <TextInput
                 style={formStyles.textInput}
                 placeholder="Search for country"
@@ -111,8 +114,8 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
                   }}
                 >
                   <StyleView
-                    padding={10}
-                    marginBottom={5}
+                    padding={sizes.spacing.lg}
+                    marginBottom={sizes.spacing.sm}
                     borderRadius={5}
                     backgroundColor={
                       item.name === field.value

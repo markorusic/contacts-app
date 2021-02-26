@@ -31,11 +31,14 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
   const dispatch = useDispatch()
   const contact = useContact(contactId)
   return (
-    <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
+    <ScreenContainer
+      paddingHorizontal={sizes.spacing.xl}
+      paddingVertical={sizes.spacing.lg}
+    >
       <StyleView
         flexDirection="row"
         justifyContent="space-between"
-        marginBottom={10}
+        marginBottom={sizes.spacing.md}
       >
         <TouchableOpacity onPress={() => Navigation.dismissModal(componentId)}>
           <StyleText fontSize={sizes.text.md} color={colors.secondaryText}>
@@ -66,7 +69,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
           <StyleView
             justifyContent="center"
             alignItems="center"
-            marginBottom={20}
+            marginBottom={sizes.spacing.xl}
           >
             <StyleText fontSize={sizes.text.xxl} fontWeight="600">
               {contact.name}
@@ -76,49 +79,51 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             {Object.keys(contactLabels).map(key => (
               <StyleView
                 key={key}
-                padding={10}
                 borderRadius={5}
-                marginBottom={10}
+                marginBottom={sizes.spacing.md}
                 backgroundColor={colors.secondaryBg}
               >
-                <StyleText color={colors.brand}>
-                  {get(contactLabels, key)}
-                </StyleText>
-                <StyleText>{get(contact, key)}</StyleText>
+                <StyleView padding={sizes.spacing.md}>
+                  <StyleText color={colors.brand}>
+                    {get(contactLabels, key)}
+                  </StyleText>
+                  <StyleText>{get(contact, key)}</StyleText>
+                </StyleView>
               </StyleView>
             ))}
-          </StyleView>
-          <StyleView
-            padding={10}
-            borderRadius={5}
-            marginBottom={10}
-            backgroundColor={colors.secondaryBg}
-          >
-            <TouchableOpacity
-              onPress={() =>
-                Alert.alert(
-                  'Are you sure that you want to remove this contact?',
-                  '',
-                  [
-                    {
-                      text: 'Yes',
-                      onPress: () => {
-                        Navigation.dismissModal(componentId)
-                        dispatch(deleteContact(contact))
-                      }
-                    },
-                    {
-                      text: 'Cancel',
-                      style: 'cancel'
-                    }
-                  ]
-                )
-              }
+            <StyleView
+              borderRadius={5}
+              marginBottom={sizes.spacing.md}
+              backgroundColor={colors.secondaryBg}
             >
-              <StyleView>
-                <StyleText color={colors.error}>Remove this contact</StyleText>
-              </StyleView>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Alert.alert(
+                    'Are you sure that you want to remove this contact?',
+                    '',
+                    [
+                      {
+                        text: 'Yes',
+                        onPress: () => {
+                          Navigation.dismissModal(componentId)
+                          dispatch(deleteContact(contact))
+                        }
+                      },
+                      {
+                        text: 'Cancel',
+                        style: 'cancel'
+                      }
+                    ]
+                  )
+                }
+              >
+                <StyleView padding={sizes.spacing.md}>
+                  <StyleText color={colors.error}>
+                    Remove this contact
+                  </StyleText>
+                </StyleView>
+              </TouchableOpacity>
+            </StyleView>
           </StyleView>
         </StyleView>
       )}

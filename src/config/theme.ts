@@ -15,5 +15,12 @@ export const sizes = {
     lg: 18,
     xl: 22,
     xxl: 26
+  },
+  spacing: {
+    sm: 5,
+    md: 10,
+    lg: 15,
+    xl: 20,
+    xxl: 25
   }
 }

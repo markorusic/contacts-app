@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { TouchableOpacity, TextInput } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
 import { colors, sizes } from '../config/theme'
@@ -11,16 +11,7 @@ import { NavigationScreenComponent } from '../shared/navigation-utils'
 import { initContacts } from '../store/contacts/contacts-actions'
 import { useContacts } from '../store/contacts/hooks'
 import { PlusIcon } from '../shared/icons'
-
-const styles = StyleSheet.create({
-  searchInput: {
-    height: 40,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    backgroundColor: '#e6e6e6',
-    color: colors.primaryText
-  }
-})
+import { formStyles } from '../shared/components/form-styles'
 
 const ContactsScreen: NavigationScreenComponent = () => {
   const dispatch = useDispatch<any>()
@@ -29,7 +20,10 @@ const ContactsScreen: NavigationScreenComponent = () => {
 
   return (
     <ScreenContainer>
-      <StyleView paddingHorizontal={15}>
+      <StyleView
+        paddingHorizontal={sizes.spacing.xl}
+        paddingTop={sizes.spacing.lg}
+      >
         <StyleView
           flexDirection="row"
           justifyContent="space-between"
@@ -53,7 +47,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
         </StyleView>
         <StyleView paddingVertical={20}>
           <TextInput
-            style={styles.searchInput}
+            style={formStyles.textInput}
             placeholder="Search"
             value={searchText}
             onChangeText={value => setSearchText(value)}
@@ -66,8 +60,8 @@ const ContactsScreen: NavigationScreenComponent = () => {
             <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
             {contacts.value.length === 0 && (
               <StyleView
-                marginTop={10}
-                padding={12}
+                marginTop={sizes.spacing.md}
+                padding={sizes.spacing.md}
                 borderRadius={5}
                 backgroundColor={colors.secondaryBg}
               >

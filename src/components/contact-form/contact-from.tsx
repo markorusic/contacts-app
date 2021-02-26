@@ -51,11 +51,14 @@ export const ContactForm: FC<ContactFormProps> = ({
       {form => {
         const disableSubmit = Object.keys(validate(form.values)).length !== 0
         return (
-          <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
+          <ScreenContainer
+            paddingHorizontal={sizes.spacing.xl}
+            paddingVertical={sizes.spacing.lg}
+          >
             <StyleView
               flexDirection="row"
               justifyContent="space-between"
-              marginBottom={10}
+              marginBottom={sizes.spacing.md}
             >
               {onCancel && (
                 <TouchableOpacity onPress={() => onCancel()}>
@@ -83,7 +86,7 @@ export const ContactForm: FC<ContactFormProps> = ({
                 </StyleText>
               </TouchableOpacity>
             </StyleView>
-            <StyleView paddingVertical={10}>
+            <StyleView paddingVertical={sizes.spacing.lg}>
               <FormTextInput
                 name="name"
                 label="Name:"

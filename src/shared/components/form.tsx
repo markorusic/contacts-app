@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useFormikContext, useField } from 'formik'
 import { TextInput, TextInputProps } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import { formStyles } from './form-styles'
 import StyleView, { StyleText } from './style-view'
 
@@ -21,7 +21,7 @@ export const FormErrorText = ({ name }: { name: string }) => {
 }
 
 export const FormLabel: FC = ({ children }) => (
-  <StyleView marginBottom={5}>
+  <StyleView marginBottom={sizes.spacing.sm}>
     <StyleText>{children}</StyleText>
   </StyleView>
 )

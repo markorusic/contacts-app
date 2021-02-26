@@ -45,10 +45,10 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
       renderSectionHeader={({ section }) => (
         <StyleText
           backgroundColor={colors.secondaryBg}
-          paddingHorizontal={20}
-          paddingVertical={5}
-          fontWeight="bold"
+          paddingHorizontal={sizes.spacing.xl}
+          paddingVertical={sizes.spacing.sm}
           fontSize={sizes.text.md}
+          fontWeight="bold"
         >
           {section.title}
         </StyleText>
@@ -73,7 +73,10 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
               })
             }}
           >
-            <StyleView paddingHorizontal={20} paddingVertical={15}>
+            <StyleView
+              paddingHorizontal={sizes.spacing.xl}
+              paddingVertical={sizes.spacing.lg}
+            >
               <StyleText fontSize={sizes.text.md} fontWeight="500">
                 {contact.name}
               </StyleText>
