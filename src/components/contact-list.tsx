@@ -5,7 +5,7 @@ import {
   OptionsModalPresentationStyle
 } from 'react-native-navigation'
 import { last, sortBy } from 'lodash'
-import { colors } from '../config/theme'
+import { colors, sizes } from '../config/theme'
 import { ContactDto } from '../store/contacts/contacts-reducer'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import { screens } from '../config/navigation'
@@ -45,10 +45,10 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
       renderSectionHeader={({ section }) => (
         <StyleText
           backgroundColor={colors.secondaryBg}
-          paddingHorizontal={20}
-          paddingVertical={5}
+          paddingHorizontal={sizes.spacing.xl}
+          paddingVertical={sizes.spacing.sm}
+          fontSize={sizes.text.md}
           fontWeight="bold"
-          fontSize={16}
         >
           {section.title}
         </StyleText>
@@ -57,8 +57,6 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
         <StyleView
           borderBottomColor={colors.secondaryBg}
           borderBottomWidth={last(section.data)?.id === contact.id ? 0 : 1}
-          paddingHorizontal={20}
-          paddingVertical={15}
         >
           <TouchableOpacity
             onPress={() => {
@@ -75,9 +73,14 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
               })
             }}
           >
-            <StyleText fontSize={16} fontWeight="500">
-              {contact.name}
-            </StyleText>
+            <StyleView
+              paddingHorizontal={sizes.spacing.xl}
+              paddingVertical={sizes.spacing.lg}
+            >
+              <StyleText fontSize={sizes.text.md} fontWeight="500">
+                {contact.name}
+              </StyleText>
+            </StyleView>
           </TouchableOpacity>
         </StyleView>
       )}

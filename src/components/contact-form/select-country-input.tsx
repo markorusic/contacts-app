@@ -2,7 +2,7 @@ import { useField, useFormikContext } from 'formik'
 import React, { FC, useEffect, useState } from 'react'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import {
   FormErrorText,
   FormLabel,
@@ -42,13 +42,13 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
   return (
     <StyleView>
       <FormLabel>{label}</FormLabel>
-      <StyleView {...formStyles.textInput} justifyContent="center">
-        <TouchableOpacity onPress={() => setShowModal(true)}>
+      <TouchableOpacity onPress={() => setShowModal(true)}>
+        <StyleView {...formStyles.textInput} justifyContent="center">
           <StyleText color={field.value ? colors.primaryText : colors.disabled}>
             {field.value ? field.value : placeholder}
           </StyleText>
-        </TouchableOpacity>
-      </StyleView>
+        </StyleView>
+      </TouchableOpacity>
       <FormErrorText name={name} />
 
       <Modal
@@ -57,19 +57,35 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
       >
-        <ScreenContainer>
-          <StyleView padding={10} flexDirection="row" alignItems="center">
-            {/* TODO: set proper icon and styling for back button */}
-            <TouchableOpacity onPress={() => setShowModal(false)}>
-              <StyleView
-                marginRight={10}
-                paddingHorizontal={10}
-                paddingVertical={5}
-              >
-                <StyleText fontSize={20}>X</StyleText>
+        <ScreenContainer
+          paddingHorizontal={sizes.spacing.xl}
+          paddingVertical={sizes.spacing.lg}
+        >
+          <StyleView>
+            <StyleView
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="baseline"
+            >
+              <StyleView flex={1}>
+                <TouchableOpacity onPress={() => setShowModal(false)}>
+                  <StyleText
+                    fontSize={sizes.text.md}
+                    color={colors.secondaryText}
+                  >
+                    Cancel
+                  </StyleText>
+                </TouchableOpacity>
               </StyleView>
-            </TouchableOpacity>
-            <StyleView flex={1}>
+              <StyleView flex={1}>
+                <StyleText textAlign="center" fontSize={sizes.text.lg}>
+                  Select country
+                </StyleText>
+              </StyleView>
+              <StyleView flex={1} />
+            </StyleView>
+
+            <StyleView paddingVertical={sizes.spacing.lg}>
               <TextInput
                 style={formStyles.textInput}
                 placeholder="Search for country"
@@ -86,11 +102,11 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             // TODO: make empty list message component and reuse here and for ContactsScreen
             ListEmptyComponent={
               <StyleView justifyContent="center" alignItems="center">
-                <StyleText fontSize={25}>No data</StyleText>
+                <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
               </StyleView>
             }
             renderItem={({ item }) => (
-              <StyleView paddingHorizontal={10}>
+              <StyleView>
                 <TouchableOpacity
                   onPress={() => {
                     form.setFieldValue(name, item.name)
@@ -98,8 +114,8 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
                   }}
                 >
                   <StyleView
-                    padding={10}
-                    marginBottom={5}
+                    padding={sizes.spacing.lg}
+                    marginBottom={sizes.spacing.sm}
                     borderRadius={5}
                     backgroundColor={
                       item.name === field.value

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { TouchableOpacity, TextInput } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
-import { colors } from '../config/theme'
+import { colors, sizes } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import ContactList from '../components/contact-list'
@@ -10,16 +10,8 @@ import { screens } from '../config/navigation'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
 import { initContacts } from '../store/contacts/contacts-actions'
 import { useContacts } from '../store/contacts/hooks'
-
-const styles = StyleSheet.create({
-  searchInput: {
-    height: 40,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    backgroundColor: '#e6e6e6',
-    color: colors.primaryText
-  }
-})
+import { PlusIcon } from '../shared/icons'
+import { formStyles } from '../shared/components/form-styles'
 
 const ContactsScreen: NavigationScreenComponent = () => {
   const dispatch = useDispatch<any>()
@@ -28,13 +20,16 @@ const ContactsScreen: NavigationScreenComponent = () => {
 
   return (
     <ScreenContainer>
-      <StyleView paddingHorizontal={15}>
+      <StyleView
+        paddingHorizontal={sizes.spacing.xl}
+        paddingTop={sizes.spacing.lg}
+      >
         <StyleView
           flexDirection="row"
           justifyContent="space-between"
           alignItems="baseline"
         >
-          <StyleText fontWeight="bold" fontSize={20}>
+          <StyleText fontWeight="bold" fontSize={sizes.text.xl}>
             Contacts
           </StyleText>
           <TouchableOpacity
@@ -47,14 +42,12 @@ const ContactsScreen: NavigationScreenComponent = () => {
               })
             }
           >
-            <StyleText fontWeight="500" fontSize={35} color={colors.brand}>
-              +
-            </StyleText>
+            <PlusIcon color={colors.brand} size={30} />
           </TouchableOpacity>
         </StyleView>
         <StyleView paddingVertical={20}>
           <TextInput
-            style={styles.searchInput}
+            style={formStyles.textInput}
             placeholder="Search"
             value={searchText}
             onChangeText={value => setSearchText(value)}
@@ -64,16 +57,18 @@ const ContactsScreen: NavigationScreenComponent = () => {
       <ContactList
         ListEmptyComponent={
           <StyleView justifyContent="center" alignItems="center">
-            <StyleText fontSize={25}>No data</StyleText>
+            <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
             {contacts.value.length === 0 && (
               <StyleView
-                marginTop={10}
-                padding={12}
+                marginTop={sizes.spacing.md}
+                padding={sizes.spacing.md}
                 borderRadius={5}
                 backgroundColor={colors.secondaryBg}
               >
                 <TouchableOpacity onPress={() => dispatch(initContacts())}>
-                  <StyleText fontSize={15}>Import mockup contacts</StyleText>
+                  <StyleText fontSize={sizes.text.md}>
+                    Import mockup contacts
+                  </StyleText>
                 </TouchableOpacity>
               </StyleView>
             )}

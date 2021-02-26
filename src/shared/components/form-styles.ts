@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 
 export const formStyles = StyleSheet.create({
   textInput: {
     height: 40,
-    paddingHorizontal: 10,
+    paddingHorizontal: sizes.spacing.md,
     borderRadius: 8,
     backgroundColor: '#e6e6e6',
     color: colors.primaryText

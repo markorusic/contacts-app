@@ -1,7 +1,7 @@
 import { Formik, FormikConfig } from 'formik'
 import React, { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import { FormTextInput } from '../../shared/components/form'
 import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
@@ -17,11 +17,6 @@ const validate = (values: ContactFormValues) => {
   if (!values.name) {
     errors.name = 'Required'
   }
-  if (!values.phoneNumber) {
-    errors.phoneNumber = 'Required'
-  } else if (values.phoneNumber.length < 5) {
-    errors.phoneNumber = 'Bad format'
-  }
   return errors
 }
 
@@ -36,7 +31,7 @@ export type ContactFormProps = Optional<
 export const ContactForm: FC<ContactFormProps> = ({
   initialValues = {
     name: '',
-    phoneNumber: '',
+    phoneNumber: undefined,
     country: undefined,
     gender: undefined,
     zipCode: undefined
@@ -56,20 +51,26 @@ export const ContactForm: FC<ContactFormProps> = ({
       {form => {
         const disableSubmit = Object.keys(validate(form.values)).length !== 0
         return (
-          <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
+          <ScreenContainer
+            paddingHorizontal={sizes.spacing.xl}
+            paddingVertical={sizes.spacing.lg}
+          >
             <StyleView
               flexDirection="row"
               justifyContent="space-between"
-              marginBottom={10}
+              marginBottom={sizes.spacing.md}
             >
               {onCancel && (
                 <TouchableOpacity onPress={() => onCancel()}>
-                  <StyleText fontSize={16} color={colors.secondaryText}>
+                  <StyleText
+                    fontSize={sizes.text.md}
+                    color={colors.secondaryText}
+                  >
                     Cancel
                   </StyleText>
                 </TouchableOpacity>
               )}
-              <StyleText fontSize={18} fontWeight="bold">
+              <StyleText fontSize={sizes.text.lg} fontWeight="bold">
                 {title}
               </StyleText>
               <TouchableOpacity
@@ -77,7 +78,7 @@ export const ContactForm: FC<ContactFormProps> = ({
                 onPress={form.handleSubmit}
               >
                 <StyleText
-                  fontSize={16}
+                  fontSize={sizes.text.md}
                   color={disableSubmit ? colors.disabled : colors.secondaryText}
                   opacity={disableSubmit ? 0.7 : 1}
                 >
@@ -85,7 +86,7 @@ export const ContactForm: FC<ContactFormProps> = ({
                 </StyleText>
               </TouchableOpacity>
             </StyleView>
-            <StyleView paddingVertical={10}>
+            <StyleView paddingVertical={sizes.spacing.lg}>
               <FormTextInput
                 name="name"
                 label="Name:"
@@ -95,6 +96,9 @@ export const ContactForm: FC<ContactFormProps> = ({
                 name="phoneNumber"
                 label="Phone number:"
                 placeholder="Type phone number"
+                keyboardType="phone-pad"
+                textContentType="telephoneNumber"
+                autoCorrect={false}
               />
               <SelectGenderInput name="gender" label="Select gender:" />
               <SelectCountryInput

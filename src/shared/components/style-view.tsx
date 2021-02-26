@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { View, ViewProps, ViewStyle, TextStyle, Text } from 'react-native'
+import { colors, sizes } from '../../config/theme'
 
 export interface StyleViewProps extends ViewStyle {
   viewProps?: Omit<ViewProps, 'style'>
-  children?: React.ReactNode
 }
 
-const StyleView: React.FC<StyleViewProps> = ({
+const StyleView: FC<StyleViewProps> = ({
   children,
   viewProps = {},
   ...props
@@ -20,14 +20,15 @@ export interface StyleTextProps extends TextStyle {
   numberOfLines?: number
 }
 
-export const StyleText: React.FC<StyleTextProps> = ({
+export const StyleText: FC<StyleTextProps> = ({
   children,
   numberOfLines,
-  color = 'black',
+  fontSize = sizes.text.sm,
+  color = colors.primaryText,
   ...props
 }) => (
   <Text
-    style={{ color, ...props }}
+    style={{ color, fontSize, ...props }}
     numberOfLines={numberOfLines}
     allowFontScaling={false}
   >
