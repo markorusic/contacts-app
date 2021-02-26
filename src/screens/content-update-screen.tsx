@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
-import { ContactForm } from '../components/contact-form/contact-from-modal'
+import { ContactForm } from '../components/contact-form/contact-from'
 import { updateContact } from '../store/contacts/contacts-actions'
 import { useContact } from '../store/contacts/hooks'
 
