@@ -10,6 +10,7 @@ import { screens } from '../config/navigation'
 import { NavigationScreenComponent } from '../shared/navigation-utils'
 import { initContacts } from '../store/contacts/contacts-actions'
 import { useContacts } from '../store/contacts/hooks'
+import { PlusIcon } from '../shared/icons'
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -47,9 +48,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
               })
             }
           >
-            <StyleText fontWeight="500" fontSize={35} color={colors.brand}>
-              +
-            </StyleText>
+            <PlusIcon color={colors.brand} size={30} />
           </TouchableOpacity>
         </StyleView>
         <StyleView paddingVertical={20}>

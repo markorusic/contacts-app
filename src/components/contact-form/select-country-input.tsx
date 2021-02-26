@@ -11,6 +11,7 @@ import {
 import { formStyles } from '../../shared/components/form-styles'
 import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
+// import { XIcon } from '../../shared/icons'
 import { RootState } from '../../store'
 import { fetchCountries } from '../../store/countries/countries-actions'
 
@@ -57,19 +58,29 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
       >
-        <ScreenContainer>
-          <StyleView padding={10} flexDirection="row" alignItems="center">
-            {/* TODO: set proper icon and styling for back button */}
-            <TouchableOpacity onPress={() => setShowModal(false)}>
-              <StyleView
-                marginRight={10}
-                paddingHorizontal={10}
-                paddingVertical={5}
-              >
-                <StyleText fontSize={20}>X</StyleText>
+        <ScreenContainer paddingHorizontal={20} paddingVertical={10}>
+          <StyleView>
+            <StyleView
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="baseline"
+            >
+              <StyleView flex={1}>
+                <TouchableOpacity onPress={() => setShowModal(false)}>
+                  <StyleText fontSize={16} color={colors.secondaryText}>
+                    Cancel
+                  </StyleText>
+                </TouchableOpacity>
               </StyleView>
-            </TouchableOpacity>
-            <StyleView flex={1}>
+              <StyleView flex={1}>
+                <StyleText textAlign="center" fontSize={18}>
+                  Select country
+                </StyleText>
+              </StyleView>
+              <StyleView flex={1} />
+            </StyleView>
+
+            <StyleView paddingVertical={15}>
               <TextInput
                 style={formStyles.textInput}
                 placeholder="Search for country"
@@ -90,7 +101,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
               </StyleView>
             }
             renderItem={({ item }) => (
-              <StyleView paddingHorizontal={10}>
+              <StyleView>
                 <TouchableOpacity
                   onPress={() => {
                     form.setFieldValue(name, item.name)
