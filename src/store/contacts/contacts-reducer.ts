@@ -4,7 +4,7 @@ import { contactsActionTypes } from './contacts-actions'
 export interface ContactDto {
   id: string
   name: string
-  phoneNumber: string
+  phoneNumber?: string
   gender?: 'male' | 'female' | 'other'
   country?: string
   zipCode?: string

@@ -17,11 +17,6 @@ const validate = (values: ContactFormValues) => {
   if (!values.name) {
     errors.name = 'Required'
   }
-  if (!values.phoneNumber) {
-    errors.phoneNumber = 'Required'
-  } else if (values.phoneNumber.length < 5) {
-    errors.phoneNumber = 'Bad format'
-  }
   return errors
 }
 
@@ -36,7 +31,7 @@ export type ContactFormProps = Optional<
 export const ContactForm: FC<ContactFormProps> = ({
   initialValues = {
     name: '',
-    phoneNumber: '',
+    phoneNumber: undefined,
     country: undefined,
     gender: undefined,
     zipCode: undefined
