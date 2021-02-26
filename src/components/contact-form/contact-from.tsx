@@ -33,8 +33,7 @@ export const ContactForm: FC<ContactFormProps> = ({
     name: '',
     phoneNumber: undefined,
     country: undefined,
-    gender: undefined,
-    zipCode: undefined
+    gender: undefined
   },
   title,
   onCancel,
@@ -105,11 +104,6 @@ export const ContactForm: FC<ContactFormProps> = ({
                 name="country"
                 label="Select country:"
                 placeholder="Country"
-              />
-              <FormTextInput
-                name="zipCode"
-                label="Select zip code:"
-                placeholder="Zip code"
               />
             </StyleView>
           </ScreenContainer>

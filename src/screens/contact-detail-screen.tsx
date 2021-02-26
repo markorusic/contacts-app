@@ -20,8 +20,7 @@ const contactLabels: Record<keyof Omit<ContactDto, 'id'>, string> = {
   name: 'Name',
   phoneNumber: 'Phone number',
   gender: 'Gender',
-  country: 'Country',
-  zipCode: 'Zip code'
+  country: 'Country'
 }
 
 const ContactDetailScreen: NavigationScreenComponent<Props> = ({

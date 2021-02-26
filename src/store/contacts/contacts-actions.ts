@@ -20,7 +20,6 @@ export const initContacts = (): RootThunk => dispatch => {
     name: randomString(5),
     gender: Math.random() > 0.5 ? 'male' : 'female',
     phoneNumber: randomString(10),
-    zipCode: randomString(5),
     country: randomString(7)
   }))
   dispatch({
