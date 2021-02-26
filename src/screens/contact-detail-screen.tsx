@@ -110,8 +110,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
                       text: 'Cancel',
                       style: 'cancel'
                     }
-                  ],
-                  { cancelable: false }
+                  ]
                 )
               }
             >
