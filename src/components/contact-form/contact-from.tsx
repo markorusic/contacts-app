@@ -95,6 +95,9 @@ export const ContactForm: FC<ContactFormProps> = ({
                 name="phoneNumber"
                 label="Phone number:"
                 placeholder="Type phone number"
+                keyboardType="phone-pad"
+                textContentType="telephoneNumber"
+                autoCorrect={false}
               />
               <SelectGenderInput name="gender" label="Select gender:" />
               <SelectCountryInput

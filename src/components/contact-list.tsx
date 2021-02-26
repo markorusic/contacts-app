@@ -57,8 +57,6 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
         <StyleView
           borderBottomColor={colors.secondaryBg}
           borderBottomWidth={last(section.data)?.id === contact.id ? 0 : 1}
-          paddingHorizontal={20}
-          paddingVertical={15}
         >
           <TouchableOpacity
             onPress={() => {
@@ -75,9 +73,11 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
               })
             }}
           >
-            <StyleText fontSize={16} fontWeight="500">
-              {contact.name}
-            </StyleText>
+            <StyleView paddingHorizontal={20} paddingVertical={15}>
+              <StyleText fontSize={16} fontWeight="500">
+                {contact.name}
+              </StyleText>
+            </StyleView>
           </TouchableOpacity>
         </StyleView>
       )}

@@ -11,7 +11,6 @@ import {
 import { formStyles } from '../../shared/components/form-styles'
 import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
-// import { XIcon } from '../../shared/icons'
 import { RootState } from '../../store'
 import { fetchCountries } from '../../store/countries/countries-actions'
 
@@ -43,13 +42,13 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
   return (
     <StyleView>
       <FormLabel>{label}</FormLabel>
-      <StyleView {...formStyles.textInput} justifyContent="center">
-        <TouchableOpacity onPress={() => setShowModal(true)}>
+      <TouchableOpacity onPress={() => setShowModal(true)}>
+        <StyleView {...formStyles.textInput} justifyContent="center">
           <StyleText color={field.value ? colors.primaryText : colors.disabled}>
             {field.value ? field.value : placeholder}
           </StyleText>
-        </TouchableOpacity>
-      </StyleView>
+        </StyleView>
+      </TouchableOpacity>
       <FormErrorText name={name} />
 
       <Modal

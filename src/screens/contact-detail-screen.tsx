@@ -16,10 +16,11 @@ type Props = {
   contactId: string
 }
 
-const contactLabels: Record<keyof Omit<ContactDto, 'id' | 'name'>, string> = {
+const contactLabels: Record<keyof Omit<ContactDto, 'id'>, string> = {
+  name: 'Name',
   phoneNumber: 'Phone number',
-  country: 'Country',
   gender: 'Gender',
+  country: 'Country',
   zipCode: 'Zip code'
 }
 
