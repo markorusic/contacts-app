@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
-import { colors } from '../config/theme'
+import { colors, sizes } from '../config/theme'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import ContactList from '../components/contact-list'
@@ -35,7 +35,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
           justifyContent="space-between"
           alignItems="baseline"
         >
-          <StyleText fontWeight="bold" fontSize={20}>
+          <StyleText fontWeight="bold" fontSize={sizes.text.xl}>
             Contacts
           </StyleText>
           <TouchableOpacity
@@ -63,7 +63,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
       <ContactList
         ListEmptyComponent={
           <StyleView justifyContent="center" alignItems="center">
-            <StyleText fontSize={25}>No data</StyleText>
+            <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
             {contacts.value.length === 0 && (
               <StyleView
                 marginTop={10}
@@ -72,7 +72,9 @@ const ContactsScreen: NavigationScreenComponent = () => {
                 backgroundColor={colors.secondaryBg}
               >
                 <TouchableOpacity onPress={() => dispatch(initContacts())}>
-                  <StyleText fontSize={15}>Import mockup contacts</StyleText>
+                  <StyleText fontSize={sizes.text.md}>
+                    Import mockup contacts
+                  </StyleText>
                 </TouchableOpacity>
               </StyleView>
             )}

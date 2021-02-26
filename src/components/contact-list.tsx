@@ -5,7 +5,7 @@ import {
   OptionsModalPresentationStyle
 } from 'react-native-navigation'
 import { last, sortBy } from 'lodash'
-import { colors } from '../config/theme'
+import { colors, sizes } from '../config/theme'
 import { ContactDto } from '../store/contacts/contacts-reducer'
 import StyleView, { StyleText } from '../shared/components/style-view'
 import { screens } from '../config/navigation'
@@ -48,7 +48,7 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
           paddingHorizontal={20}
           paddingVertical={5}
           fontWeight="bold"
-          fontSize={16}
+          fontSize={sizes.text.md}
         >
           {section.title}
         </StyleText>
@@ -74,7 +74,7 @@ const ContactList: FC<ContactListProps> = ({ data = [], ...props }) => {
             }}
           >
             <StyleView paddingHorizontal={20} paddingVertical={15}>
-              <StyleText fontSize={16} fontWeight="500">
+              <StyleText fontSize={sizes.text.md} fontWeight="500">
                 {contact.name}
               </StyleText>
             </StyleView>

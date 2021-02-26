@@ -3,7 +3,7 @@ import { Alert, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { useDispatch } from 'react-redux'
 import { get } from 'lodash'
-import { colors } from '../config/theme'
+import { colors, sizes } from '../config/theme'
 import { screens } from '../config/navigation'
 import ScreenContainer from '../shared/components/screen-container'
 import StyleView, { StyleText } from '../shared/components/style-view'
@@ -38,7 +38,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
         marginBottom={10}
       >
         <TouchableOpacity onPress={() => Navigation.dismissModal(componentId)}>
-          <StyleText fontSize={16} color={colors.secondaryText}>
+          <StyleText fontSize={sizes.text.md} color={colors.secondaryText}>
             Back
           </StyleText>
         </TouchableOpacity>
@@ -54,7 +54,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
               })
             }
           >
-            <StyleText fontSize={16} color={colors.secondaryText}>
+            <StyleText fontSize={sizes.text.md} color={colors.secondaryText}>
               Update
             </StyleText>
           </TouchableOpacity>
@@ -68,7 +68,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             alignItems="center"
             marginBottom={20}
           >
-            <StyleText fontSize={26} fontWeight="600">
+            <StyleText fontSize={sizes.text.xxl} fontWeight="600">
               {contact.name}
             </StyleText>
           </StyleView>
@@ -116,9 +116,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
               }
             >
               <StyleView>
-                <StyleText fontSize={15} color={colors.error}>
-                  Remove this contact
-                </StyleText>
+                <StyleText color={colors.error}>Remove this contact</StyleText>
               </StyleView>
             </TouchableOpacity>
           </StyleView>

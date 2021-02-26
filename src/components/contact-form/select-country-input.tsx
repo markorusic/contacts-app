@@ -2,7 +2,7 @@ import { useField, useFormikContext } from 'formik'
 import React, { FC, useEffect, useState } from 'react'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import {
   FormErrorText,
   FormLabel,
@@ -66,13 +66,16 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             >
               <StyleView flex={1}>
                 <TouchableOpacity onPress={() => setShowModal(false)}>
-                  <StyleText fontSize={16} color={colors.secondaryText}>
+                  <StyleText
+                    fontSize={sizes.text.md}
+                    color={colors.secondaryText}
+                  >
                     Cancel
                   </StyleText>
                 </TouchableOpacity>
               </StyleView>
               <StyleView flex={1}>
-                <StyleText textAlign="center" fontSize={18}>
+                <StyleText textAlign="center" fontSize={sizes.text.lg}>
                   Select country
                 </StyleText>
               </StyleView>
@@ -96,7 +99,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             // TODO: make empty list message component and reuse here and for ContactsScreen
             ListEmptyComponent={
               <StyleView justifyContent="center" alignItems="center">
-                <StyleText fontSize={25}>No data</StyleText>
+                <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
               </StyleView>
             }
             renderItem={({ item }) => (

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { View, ViewProps, ViewStyle, TextStyle, Text } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 
 export interface StyleViewProps extends ViewStyle {
   viewProps?: Omit<ViewProps, 'style'>
@@ -23,11 +23,12 @@ export interface StyleTextProps extends TextStyle {
 export const StyleText: FC<StyleTextProps> = ({
   children,
   numberOfLines,
+  fontSize = sizes.text.sm,
   color = colors.primaryText,
   ...props
 }) => (
   <Text
-    style={{ color, ...props }}
+    style={{ color, fontSize, ...props }}
     numberOfLines={numberOfLines}
     allowFontScaling={false}
   >

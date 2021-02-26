@@ -1,7 +1,7 @@
 import { Formik, FormikConfig } from 'formik'
 import React, { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { colors } from '../../config/theme'
+import { colors, sizes } from '../../config/theme'
 import { FormTextInput } from '../../shared/components/form'
 import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
@@ -59,12 +59,15 @@ export const ContactForm: FC<ContactFormProps> = ({
             >
               {onCancel && (
                 <TouchableOpacity onPress={() => onCancel()}>
-                  <StyleText fontSize={16} color={colors.secondaryText}>
+                  <StyleText
+                    fontSize={sizes.text.md}
+                    color={colors.secondaryText}
+                  >
                     Cancel
                   </StyleText>
                 </TouchableOpacity>
               )}
-              <StyleText fontSize={18} fontWeight="bold">
+              <StyleText fontSize={sizes.text.lg} fontWeight="bold">
                 {title}
               </StyleText>
               <TouchableOpacity
@@ -72,7 +75,7 @@ export const ContactForm: FC<ContactFormProps> = ({
                 onPress={form.handleSubmit}
               >
                 <StyleText
-                  fontSize={16}
+                  fontSize={sizes.text.md}
                   color={disableSubmit ? colors.disabled : colors.secondaryText}
                   opacity={disableSubmit ? 0.7 : 1}
                 >
