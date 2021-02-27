@@ -1,5 +1,6 @@
 import { useField, useFormikContext } from 'formik'
 import React, { FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { colors, sizes } from '../../config/theme'
@@ -21,8 +22,9 @@ export interface SelectCountryInputProps extends InputProps {
 export const SelectCountryInput: FC<SelectCountryInputProps> = ({
   name,
   label,
-  placeholder = 'Select Country'
+  placeholder = ''
 }) => {
+  const { t } = useTranslation()
   const [field] = useField(name)
   const form = useFormikContext()
   const dispatch = useDispatch<any>()
@@ -45,7 +47,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
       <TouchableOpacity onPress={() => setShowModal(true)}>
         <StyleView {...formStyles.textInput} justifyContent="center">
           <StyleText color={field.value ? colors.primaryText : colors.disabled}>
-            {field.value ? field.value : placeholder}
+            {field.value ? field.value : t(placeholder)}
           </StyleText>
         </StyleView>
       </TouchableOpacity>
@@ -73,13 +75,13 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
                     fontSize={sizes.text.md}
                     color={colors.secondaryText}
                   >
-                    Cancel
+                    {t('commons.cancel')}
                   </StyleText>
                 </TouchableOpacity>
               </StyleView>
               <StyleView flex={1}>
                 <StyleText textAlign="center" fontSize={sizes.text.lg}>
-                  Select country
+                  {t('contacts.selectCountry')}
                 </StyleText>
               </StyleView>
               <StyleView flex={1} />
@@ -88,7 +90,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             <StyleView paddingVertical={sizes.spacing.lg}>
               <TextInput
                 style={formStyles.textInput}
-                placeholder="Search for country"
+                placeholder={t('contacts.searchCountry')}
                 value={searchText}
                 onChangeText={value => setSearchText(value)}
               />
@@ -102,7 +104,9 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             // TODO: make empty list message component and reuse here and for ContactsScreen
             ListEmptyComponent={
               <StyleView justifyContent="center" alignItems="center">
-                <StyleText fontSize={sizes.text.xxl}>No data</StyleText>
+                <StyleText fontSize={sizes.text.xxl}>
+                  {t('commons.noData')}
+                </StyleText>
               </StyleView>
             }
             renderItem={({ item }) => (

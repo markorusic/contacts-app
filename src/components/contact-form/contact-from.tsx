@@ -1,5 +1,6 @@
 import { Formik, FormikConfig } from 'formik'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity } from 'react-native'
 import { colors, sizes } from '../../config/theme'
 import { FormTextInput } from '../../shared/components/form'
@@ -16,7 +17,7 @@ export type ContactFormValues = Omit<ContactDto, 'id'>
 const validate = (values: ContactFormValues) => {
   const errors: Record<string, string> = {}
   if (!values.name) {
-    errors.name = 'Required'
+    errors.name = 'validation.required'
   }
   return errors
 }
@@ -36,10 +37,11 @@ export const ContactForm: FC<ContactFormProps> = ({
     country: undefined,
     gender: undefined
   },
-  title,
+  title = '',
   onCancel,
   ...props
 }) => {
+  const { t } = useTranslation()
   return (
     <Formik<ContactFormValues>
       validateOnBlur={false}
@@ -66,12 +68,12 @@ export const ContactForm: FC<ContactFormProps> = ({
                     fontSize={sizes.text.md}
                     color={colors.secondaryText}
                   >
-                    Cancel
+                    {t('commons.cancel')}
                   </StyleText>
                 </TouchableOpacity>
               )}
               <StyleText fontSize={sizes.text.lg} fontWeight="bold">
-                {title}
+                {t(title)}
               </StyleText>
               <TouchableOpacity
                 disabled={disableSubmit}
@@ -82,26 +84,26 @@ export const ContactForm: FC<ContactFormProps> = ({
                   color={disableSubmit ? colors.disabled : colors.secondaryText}
                   opacity={disableSubmit ? 0.7 : 1}
                 >
-                  Save
+                  {t('commons.save')}
                 </StyleText>
               </TouchableOpacity>
             </StyleView>
             <StyleView paddingVertical={sizes.spacing.lg}>
               <FormTextInput
                 name="name"
-                label="Name"
-                placeholder="Enter name"
+                label="contacts.nameLabel"
+                placeholder="contacts.namePlaceholder"
               />
-              <SelectGenderInput name="gender" label="Gender" />
+              <SelectGenderInput name="gender" label="contacts.genderLabel" />
               <SelectCountryInput
                 name="country"
-                label="Country"
-                placeholder="Press to select country"
+                label="contacts.countryLabel"
+                placeholder="contacts.countryPlaceholder"
               />
               <PhoneNumberInput
                 name="phoneNumber"
-                label="Phone number"
-                placeholder="Enter phone number"
+                label="contacts.phoneNumberLabel"
+                placeholder="contacts.phoneNumberPlaceholder"
               />
             </StyleView>
           </ScreenContainer>

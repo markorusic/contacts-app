@@ -1,6 +1,7 @@
 import React from 'react'
 import { Alert, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { get } from 'lodash'
 import { colors, sizes } from '../config/theme'
@@ -17,16 +18,17 @@ type Props = {
 }
 
 const contactLabels: Record<keyof Omit<ContactDto, 'id'>, string> = {
-  name: 'Name',
-  gender: 'Gender',
-  country: 'Country',
-  phoneNumber: 'Phone number'
+  name: 'contacts.nameLabel',
+  gender: 'contacts.genderLabel',
+  country: 'contacts.countryLabel',
+  phoneNumber: 'contacts.phoneNumberLabel'
 }
 
 const ContactDetailScreen: NavigationScreenComponent<Props> = ({
   contactId,
   componentId
 }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const contact = useContact(contactId)
   return (
@@ -41,7 +43,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
       >
         <TouchableOpacity onPress={() => Navigation.dismissModal(componentId)}>
           <StyleText fontSize={sizes.text.md} color={colors.secondaryText}>
-            Back
+            {t('commons.back')}
           </StyleText>
         </TouchableOpacity>
         {contact && (
@@ -57,7 +59,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             }
           >
             <StyleText fontSize={sizes.text.md} color={colors.secondaryText}>
-              Update
+              {t('commons.update')}
             </StyleText>
           </TouchableOpacity>
         )}
@@ -84,7 +86,7 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
               >
                 <StyleView padding={sizes.spacing.md}>
                   <StyleText color={colors.brand}>
-                    {get(contactLabels, key)}
+                    {t(get(contactLabels, key))}
                   </StyleText>
                   <StyleText>{get(contact, key)}</StyleText>
                 </StyleView>
@@ -97,28 +99,24 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             >
               <TouchableOpacity
                 onPress={() =>
-                  Alert.alert(
-                    'Are you sure that you want to remove this contact?',
-                    '',
-                    [
-                      {
-                        text: 'Yes',
-                        onPress: () => {
-                          Navigation.dismissModal(componentId)
-                          dispatch(deleteContact(contact))
-                        }
-                      },
-                      {
-                        text: 'Cancel',
-                        style: 'cancel'
+                  Alert.alert(t('contacts.removeContactConfirm'), '', [
+                    {
+                      text: t('commons.yes'),
+                      onPress: () => {
+                        Navigation.dismissModal(componentId)
+                        dispatch(deleteContact(contact))
                       }
-                    ]
-                  )
+                    },
+                    {
+                      text: t('commons.cancel'),
+                      style: 'cancel'
+                    }
+                  ])
                 }
               >
                 <StyleView padding={sizes.spacing.md}>
                   <StyleText color={colors.error}>
-                    Remove this contact
+                    {t('contacts.removeContact')}
                   </StyleText>
                 </StyleView>
               </TouchableOpacity>
