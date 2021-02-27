@@ -18,10 +18,9 @@ type Props = {
 
 const contactLabels: Record<keyof Omit<ContactDto, 'id'>, string> = {
   name: 'Name',
-  phoneNumber: 'Phone number',
   gender: 'Gender',
   country: 'Country',
-  zipCode: 'Zip code'
+  phoneNumber: 'Phone number'
 }
 
 const ContactDetailScreen: NavigationScreenComponent<Props> = ({

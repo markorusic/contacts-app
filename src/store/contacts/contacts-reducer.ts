@@ -7,7 +7,6 @@ export interface ContactDto {
   phoneNumber?: string
   gender?: 'male' | 'female' | 'other'
   country?: string
-  zipCode?: string
 }
 
 export type ContactsState = {
