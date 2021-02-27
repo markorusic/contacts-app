@@ -22,5 +22,6 @@ export const sizes = {
     lg: 15,
     xl: 20,
     xxl: 25
-  }
+  },
+  flex1: { flex: 1 }
 }
