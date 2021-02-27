@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import { useFormikContext } from 'formik'
 import { flatten } from 'lodash'
 import {
@@ -16,8 +17,10 @@ import { ContactFormValues } from './contact-from'
 export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
   name,
   label,
+  placeholder = '',
   ...props
 }) => {
+  const { t } = useTranslation()
   const form = useFormikContext<ContactFormValues>()
   const countries = useCountries(form.values.country)
   const callingCodes = form.values.country
@@ -33,7 +36,7 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
           <StyleView paddingVertical={sizes.spacing.md}>
             <StyleView>
               <StyleText color={colors.disabled}>
-                Calling code suggestions:
+                {t('contacts.callingCodeSuggestions')}:
               </StyleText>
             </StyleView>
             <StyleView flexDirection="row" paddingVertical={sizes.spacing.sm}>
@@ -67,6 +70,7 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
             textContentType="telephoneNumber"
             autoCorrect={false}
             {...props}
+            placeholder={t(placeholder)}
             style={formStyles.textInput}
             value={form.values.phoneNumber}
             onChangeText={value => form.setFieldValue(name, value)}

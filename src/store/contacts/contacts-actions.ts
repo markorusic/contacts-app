@@ -9,7 +9,7 @@ export const contactsActionTypes = {
   update: 'contacts.update'
 }
 
-export const initContacts = (): RootThunk => dispatch => {
+export const importContacts = (): RootThunk => dispatch => {
   const alphabet = 'qwertyuiopasdfghjklzxcvbnm'
   const randomString = (size = 5) =>
     capitalize(

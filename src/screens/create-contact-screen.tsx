@@ -9,7 +9,7 @@ const CreateContactScreen: NavigationScreenComponent = props => {
   const dispatch = useDispatch()
   return (
     <ContactForm
-      title="New Contact"
+      title="contacts.newContact"
       onCancel={() => Navigation.dismissModal(props.componentId)}
       onSubmit={values => {
         dispatch(createContact(values))

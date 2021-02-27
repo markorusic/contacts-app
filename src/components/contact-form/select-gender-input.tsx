@@ -1,5 +1,6 @@
 import { useFormikContext } from 'formik'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity } from 'react-native'
 import { colors, sizes } from '../../config/theme'
 import {
@@ -13,6 +14,7 @@ import { ContactDto } from '../../store/contacts/contacts-reducer'
 const GENDER_OPTIONS: ContactDto['gender'][] = ['male', 'female', 'other']
 
 export const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
+  const { t } = useTranslation()
   const form = useFormikContext<{ gender: ContactDto['gender'] }>()
   return (
     <StyleView>
@@ -35,7 +37,7 @@ export const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
                   : colors.primaryBg
               }
             >
-              <StyleText textTransform="capitalize">{gender}</StyleText>
+              <StyleText>{t(`commons.${gender}`)}</StyleText>
             </StyleView>
           </TouchableOpacity>
         ))}

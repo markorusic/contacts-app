@@ -1,0 +1,35 @@
+{
+  "validation": {
+    "required": "Field is required"
+  },
+  "commons": {
+    "cancel": "Cancel",
+    "back": "Back",
+    "save": "Save",
+    "update": "Update",
+    "yes": "Yes",
+    "noData": "No data",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "errorOccured": "An error occured!"
+  },
+  "contacts": {
+    "contacts": "Contacts",
+    "search": "Search contacts...",
+    "importContacts": "Import mockup contacts",
+    "newContact": "New contact",
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter name",
+    "genderLabel": "Gender",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Press to select country",
+    "phoneNumberLabel": "Phone number",
+    "phoneNumberPlaceholder": "Enter phone number",
+    "selectCountry": "Select country",
+    "searchCountry": "Search countries...",
+    "callingCodeSuggestions": "Calling code suggestions",
+    "removeContact": "Remove this contact",
+    "removeContactConfirm": "Are you sure that you want to remove this contact?"
+  }
+}
