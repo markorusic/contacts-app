@@ -91,6 +91,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
               <TextInput
                 style={formStyles.textInput}
                 placeholder={t('contacts.searchCountry')}
+                placeholderTextColor={colors.disabled}
                 value={searchText}
                 onChangeText={value => setSearchText(value)}
               />
@@ -123,8 +124,8 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
                     borderRadius={5}
                     backgroundColor={
                       item.name === field.value
-                        ? colors.secondaryBg
-                        : colors.primaryBg
+                        ? colors.brand
+                        : colors.secondaryBg
                     }
                   >
                     <StyleText>{item.name}</StyleText>

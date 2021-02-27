@@ -51,6 +51,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
           <TextInput
             style={formStyles.textInput}
             placeholder={t('contacts.search')}
+            placeholderTextColor={colors.disabled}
             value={searchText}
             onChangeText={value => setSearchText(value)}
           />

@@ -69,6 +69,7 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
             keyboardType="phone-pad"
             textContentType="telephoneNumber"
             autoCorrect={false}
+            placeholderTextColor={colors.disabled}
             {...props}
             placeholder={t(placeholder)}
             style={formStyles.textInput}
