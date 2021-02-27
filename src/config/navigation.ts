@@ -1,5 +1,5 @@
 import { Options } from 'react-native-navigation'
-import { colors } from './theme'
+import { colors, colorSchemeName } from './theme'
 
 export const screens = {
   Contacts: 'Contacts',
@@ -9,6 +9,9 @@ export const screens = {
 }
 
 export const navigationOptions: Options = {
+  statusBar: {
+    style: colorSchemeName === 'dark' ? 'light' : 'dark'
+  },
   topBar: {
     visible: false
   },
