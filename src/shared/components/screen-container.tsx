@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native'
+import { sizes } from '../../config/theme'
 import StyleView, { StyleViewProps } from './style-view'
-
-const styles = StyleSheet.create({ container: { flex: 1 } })
 
 const ScreenContainer: FC<StyleViewProps> = props => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={sizes.flex1}>
       <StyleView flex={1} {...props} />
     </SafeAreaView>
   )

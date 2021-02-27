@@ -46,7 +46,7 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
                   onPress={() =>
                     form.setFieldValue(
                       name,
-                      code + form.values.phoneNumber ?? ''
+                      code + (form.values.phoneNumber ?? '')
                     )
                   }
                 >
