@@ -7,10 +7,11 @@ import ScreenContainer from '../../shared/components/screen-container'
 import StyleView, { StyleText } from '../../shared/components/style-view'
 import { Optional } from '../../shared/types'
 import { ContactDto } from '../../store/contacts/contacts-reducer'
+import { PhoneNumberInput } from './phone-number-input'
 import { SelectCountryInput } from './select-country-input'
 import { SelectGenderInput } from './select-gender-input'
 
-type ContactFormValues = Omit<ContactDto, 'id'>
+export type ContactFormValues = Omit<ContactDto, 'id'>
 
 const validate = (values: ContactFormValues) => {
   const errors: Record<string, string> = {}
@@ -88,22 +89,19 @@ export const ContactForm: FC<ContactFormProps> = ({
             <StyleView paddingVertical={sizes.spacing.lg}>
               <FormTextInput
                 name="name"
-                label="Name:"
-                placeholder="Type name"
+                label="Name"
+                placeholder="Enter name"
               />
-              <FormTextInput
-                name="phoneNumber"
-                label="Phone number:"
-                placeholder="Type phone number"
-                keyboardType="phone-pad"
-                textContentType="telephoneNumber"
-                autoCorrect={false}
-              />
-              <SelectGenderInput name="gender" label="Select gender:" />
+              <SelectGenderInput name="gender" label="Gender" />
               <SelectCountryInput
                 name="country"
-                label="Select country:"
-                placeholder="Country"
+                label="Country"
+                placeholder="Press to select country"
+              />
+              <PhoneNumberInput
+                name="phoneNumber"
+                label="Phone number"
+                placeholder="Enter phone number"
               />
             </StyleView>
           </ScreenContainer>
