@@ -17,11 +17,23 @@ type Props = {
   contactId: string
 }
 
-const contactLabels: Record<keyof Omit<ContactDto, 'id'>, string> = {
-  name: 'contacts.nameLabel',
-  gender: 'contacts.genderLabel',
-  country: 'contacts.countryLabel',
-  phoneNumber: 'contacts.phoneNumberLabel'
+const contactDisplayFields: Record<
+  keyof Omit<ContactDto, 'id'>,
+  { label: string; langPrefix?: string }
+> = {
+  name: {
+    label: 'contacts.nameLabel'
+  },
+  gender: {
+    label: 'contacts.genderLabel',
+    langPrefix: 'commons.'
+  },
+  country: {
+    label: 'contacts.countryLabel'
+  },
+  phoneNumber: {
+    label: 'contacts.phoneNumberLabel'
+  }
 }
 
 const ContactDetailScreen: NavigationScreenComponent<Props> = ({
@@ -77,21 +89,25 @@ const ContactDetailScreen: NavigationScreenComponent<Props> = ({
             </StyleText>
           </StyleView>
           <StyleView>
-            {Object.keys(contactLabels).map(key => (
-              <StyleView
-                key={key}
-                borderRadius={5}
-                marginBottom={sizes.spacing.md}
-                backgroundColor={colors.secondaryBg}
-              >
-                <StyleView padding={sizes.spacing.md}>
-                  <StyleText color={colors.brand}>
-                    {t(get(contactLabels, key))}
-                  </StyleText>
-                  <StyleText>{get(contact, key)}</StyleText>
+            {Object.entries(contactDisplayFields).map(([key, field]) => {
+              const { label, langPrefix } = field
+              const value = get(contact, key) as string
+              return (
+                <StyleView
+                  key={key}
+                  borderRadius={5}
+                  marginBottom={sizes.spacing.md}
+                  backgroundColor={colors.secondaryBg}
+                >
+                  <StyleView padding={sizes.spacing.md}>
+                    <StyleText color={colors.brand}>{t(label)}</StyleText>
+                    <StyleText>
+                      {langPrefix ? t(`${langPrefix}${value}`) : value}
+                    </StyleText>
+                  </StyleView>
                 </StyleView>
-              </StyleView>
-            ))}
+              )
+            })}
             <StyleView
               borderRadius={5}
               marginBottom={sizes.spacing.md}

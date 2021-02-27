@@ -36,7 +36,7 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
           <StyleView paddingVertical={sizes.spacing.md}>
             <StyleView>
               <StyleText color={colors.disabled}>
-                {'contacts.callingCodeSuggestions'}
+                {t('contacts.callingCodeSuggestions')}:
               </StyleText>
             </StyleView>
             <StyleView flexDirection="row" paddingVertical={sizes.spacing.sm}>

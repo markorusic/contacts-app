@@ -4,22 +4,21 @@
   },
   "commons": {
     "cancel": "Cancel",
-    "edit": "Edit",
     "back": "Back",
     "save": "Save",
     "update": "Update",
     "yes": "Yes",
-    "delete": "Delete",
-    "error": "An error occured!",
     "noData": "No data",
-    "successfulDelete": "Successfully deleted!",
-    "deletePrompt": "Are you sure you want to delete this?"
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "errorOccured": "An error occured!"
   },
   "contacts": {
     "contacts": "Contacts",
     "search": "Search contacts...",
     "importContacts": "Import mockup contacts",
-    "newContact": "New contacts",
+    "newContact": "New contact",
     "nameLabel": "Name",
     "namePlaceholder": "Enter name",
     "genderLabel": "Gender",
@@ -28,8 +27,8 @@
     "phoneNumberLabel": "Phone number",
     "phoneNumberPlaceholder": "Enter phone number",
     "selectCountry": "Select country",
-    "searchCountry": "Search for country",
-    "callingCodeSuggestions": "Calling code suggestions:",
+    "searchCountry": "Search countries...",
+    "callingCodeSuggestions": "Calling code suggestions",
     "removeContact": "Remove this contact",
     "removeContactConfirm": "Are you sure that you want to remove this contact?"
   }
