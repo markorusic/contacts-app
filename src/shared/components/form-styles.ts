@@ -6,7 +6,7 @@ export const formStyles = StyleSheet.create({
     height: 40,
     paddingHorizontal: sizes.spacing.md,
     borderRadius: 8,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: colors.secondaryBg,
     color: colors.primaryText
   },
   errorBorder: {
