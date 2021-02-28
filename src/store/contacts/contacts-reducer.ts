@@ -22,7 +22,7 @@ const contactsReducer = (
   action: Action
 ): ContactsState => {
   switch (action.type) {
-    case contactsActionTypes.init:
+    case contactsActionTypes.import:
       return {
         ...state,
         value: action.payload as ContactDto[]
