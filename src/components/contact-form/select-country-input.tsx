@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { colors, sizes } from '../../config/theme'
+import { EmptyList } from '../../shared/components/empty-list'
 import {
   FormErrorText,
   FormLabel,
@@ -102,14 +103,7 @@ export const SelectCountryInput: FC<SelectCountryInputProps> = ({
             data={countries.filter(country =>
               country.name.toLowerCase().includes(searchText.toLowerCase())
             )}
-            // TODO: make empty list message component and reuse here and for ContactsScreen
-            ListEmptyComponent={
-              <StyleView justifyContent="center" alignItems="center">
-                <StyleText fontSize={sizes.text.xxl}>
-                  {t('commons.noData')}
-                </StyleText>
-              </StyleView>
-            }
+            ListEmptyComponent={EmptyList}
             renderItem={({ item }) => (
               <StyleView>
                 <TouchableOpacity

@@ -13,6 +13,7 @@ import { importContacts } from '../store/contacts/contacts-actions'
 import { useContacts } from '../store/contacts/hooks'
 import { PlusIcon } from '../shared/icons'
 import { formStyles } from '../shared/components/form-styles'
+import { EmptyList } from '../shared/components/empty-list'
 
 const ContactsScreen: NavigationScreenComponent = () => {
   const { t } = useTranslation()
@@ -59,10 +60,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
       </StyleView>
       <ContactList
         ListEmptyComponent={
-          <StyleView justifyContent="center" alignItems="center">
-            <StyleText fontSize={sizes.text.xxl}>
-              {t('commons.noData')}
-            </StyleText>
+          <EmptyList>
             {contacts.value.length === 0 && (
               <StyleView
                 marginTop={sizes.spacing.md}
@@ -77,7 +75,7 @@ const ContactsScreen: NavigationScreenComponent = () => {
                 </TouchableOpacity>
               </StyleView>
             )}
-          </StyleView>
+          </EmptyList>
         }
         data={contacts.value.filter(contact =>
           contact.name.toLowerCase().includes(searchText.toLowerCase())
