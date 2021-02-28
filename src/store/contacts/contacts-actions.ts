@@ -3,19 +3,21 @@ import { ContactDto } from './contacts-reducer'
 import { RootThunk } from '..'
 
 export const contactsActionTypes = {
-  init: 'contacts.init',
+  import: 'contacts.import',
   create: 'contacts.create',
   delete: 'contacts.delete',
   update: 'contacts.update'
 }
 
-export const importContacts = (): RootThunk => dispatch => {
+export const importContacts = (
+  numberOfContacts = 100
+): RootThunk => dispatch => {
   const alphabet = 'qwertyuiopasdfghjklzxcvbnm'
   const randomString = (size = 5) =>
     capitalize(
       times(size, () => alphabet[random(0, alphabet.length - 1)]).join('')
     )
-  const contacts: ContactDto[] = range(0, 100).map(id => ({
+  const contacts: ContactDto[] = range(0, numberOfContacts).map(id => ({
     id: id.toString(),
     name: randomString(5),
     gender: Math.random() > 0.5 ? 'male' : 'female',
@@ -23,7 +25,7 @@ export const importContacts = (): RootThunk => dispatch => {
     country: randomString(7)
   }))
   dispatch({
-    type: contactsActionTypes.init,
+    type: contactsActionTypes.import,
     payload: contacts
   })
 }
