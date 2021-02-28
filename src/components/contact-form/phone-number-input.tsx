@@ -51,10 +51,10 @@ export const PhoneNumberInput: FC<TextInputProps & InputProps> = ({
                   }
                 >
                   <StyleView
+                    marginRight={sizes.spacing.sm}
                     padding={sizes.spacing.md}
+                    backgroundColor={colors.secondaryBg}
                     borderRadius={5}
-                    borderWidth={1}
-                    borderColor={colors.disabled}
                   >
                     <StyleText>{code}</StyleText>
                   </StyleView>

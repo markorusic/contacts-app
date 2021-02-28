@@ -29,12 +29,10 @@ export const SelectGenderInput: FC<InputProps> = ({ name, label }) => {
               marginRight={sizes.spacing.sm}
               padding={sizes.spacing.md}
               borderRadius={5}
-              borderWidth={1}
-              borderColor={colors.disabled}
               backgroundColor={
                 form.values.gender === gender
-                  ? colors.secondaryBg
-                  : colors.primaryBg
+                  ? colors.brand
+                  : colors.secondaryBg
               }
             >
               <StyleText>{t(`commons.${gender}`)}</StyleText>
