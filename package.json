@@ -54,6 +54,7 @@
     "preset": "react-native",
     "testMatch": [
       "**/__tests__/**/*.[ts]s?(x)"
-    ]
+    ],
+    "resetMocks": true
   }
 }
